@@ -181,21 +181,7 @@ speedtest-сервисы, поэтому цифру можно напрямую 
 
 1. **Взять URL без лимитов.** .
 2. **Уменьшить `-n`** — например, `-n 3` вместо `-n 10`.
-3. **Добавить паузу между запросами.** В коде легко добавить флаг `--delay`:
 
-   ```python
-   p.add_argument("--delay", type=float, default=0.0,
-                  help="Пауза между запросами, сек (по умолчанию 0)")
-   ...
-   if args.delay > 0:
-       time.sleep(args.delay)
-   ```
-
-   Тогда `python3 speedtest.py <URL> -n 10 --delay 2` будет ждать 2 секунды
-   между запросами, и лимит не сработает.
-4. **Уважать `Retry-After`.** В `except HTTPError` можно прочитать
-   `e.headers.get("Retry-After")` и сделать `time.sleep(int(retry_after))`
-   перед следующим запросом.
 
 ## Где брать URL для теста
 
